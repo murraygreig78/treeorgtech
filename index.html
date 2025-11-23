@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tree - Brand Management Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            padding: 20px 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #27ae60;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            letter-spacing: 2px;
+        }
+
+        .hero .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .hero .cta-button:hover {
+            background-color: #229954;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 40px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        section h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        /* Introduction Section */
+        .intro {
+            background-color: #f8f9fa;
+        }
+
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .intro-image {
+            max-width: 100%;
+            height: auto;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background-color: #fff;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .benefit-card h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #27ae60;
+        }
+
+        .benefit-card p {
+            color: #666;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: #f8f9fa;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .process-step {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .process-step .step-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .process-step h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .testimonial h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .testimonial p {
+            font-size: 20px;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-logo {
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+
+        /* Demo Form Section */
+        .demo-form {
+            background-color: #fff;
+        }
+
+        .demo-form h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #27ae60;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #229954;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .subtitle {
+                font-size: 14px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .benefits-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">tree</div>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#demo">Demo Request</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>All your brand assets at your fingertips</h1>
+            <p class="subtitle">CUSTOMISE BRANDED ARTWORK WITH NO DESIGN OR DEV SKILLS</p>
+            <a href="#demo" class="cta-button">Find out how</a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="intro">
+        <div class="container">
+            <div class="intro-content">
+                <h2>Meet Osmosis</h2>
+                <h3>the brand manager</h3>
+                <p>Osmosis is a tool that allows brands to take control of their artwork resizing, editing and ordering. All branded material gets converted into easy-to-use templates, enabling stakeholders, who do not have design or development skills, to order advertising material themselves. The agency only needs to get involved in ideation and roll-out if they choose, thereafter Osmosis becomes the central storing, customising and ordering platform. A specialist is not required to adjust or order the artwork, anyone can do it. This approach saves clients substantial amounts of money on studio time and gives agencies the time to focus on the creative product rather than getting distracted by constant editing and resizing.</p>
+                <p>The brand's CI guidelines are pre-loaded and Osmosis sets the desired limitations, stopping users from breaking any CI rules. The centralisation of the advertising material procurement further saves the client money as they can take advantage of bulk order discounts with printing vendors and publications. Osmosis also eases the process of agency hand-over and induction as the client owns their own searchable artwork repository.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2>The Benefits</h2>
+            <p style="text-align: center; font-size: 18px; margin-bottom: 40px;">How will Osmosis help your brand</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4>Become more agile</h4>
+                    <p>Get customised artwork out in minutes</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Spend your budget wisely</h4>
+                    <p>Reduce unnecessary professional fees</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Centralize your spend</h4>
+                    <p>More control, bulk order benefits</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Artwork Repository</h4>
+                    <p>All your artwork saved on one platform</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Brand Consistency</h4>
+                    <p>Users cannot break Corporate ID rules</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Analytics & Reporting</h4>
+                    <p>Get detailed reporting on all activity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2>The Process</h2>
+            <p style="text-align: center; font-size: 18px; margin-bottom: 40px;">How Osmosis works</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1.</div>
+                    <h4>Get the brief</h4>
+                    <p>a Regional sales manager needs a print advert for a local publication</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2.</div>
+                    <h4>Log in</h4>
+                    <p>The systems knows who they are, pre-populates assets accordingly</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3.</div>
+                    <h4>Select</h4>
+                    <p>They select the artwork they need from a searchable library of assets</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4.</div>
+                    <h4>Edit</h4>
+                    <p>Easily edit text, swap images and resize artwork for different publications</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5.</div>
+                    <h4>Consistency</h4>
+                    <p>The artwork comes with pre-set limitations to ensure brand consistency</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6.</div>
+                    <h4>Order</h4>
+                    <p>Orders are centrally controlled, enabling brands to centralise regional ad spend</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">7.</div>
+                    <h4>Emails</h4>
+                    <p>A pre-selected brand guru gets notified and can preview the order for approval</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">8.</div>
+                    <h4>Approval</h4>
+                    <p>Selected approvers can edit orders, if need be, or simply click to approve</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">9.</div>
+                    <h4>Download</h4>
+                    <p>After final approval a high res, print-ready PDF-X file can be downloaded</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">10.</div>
+                    <h4>Send</h4>
+                    <p>The artwork is then sent directly to the publication in the correct format</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">11.</div>
+                    <h4>Reporting</h4>
+                    <p>Get access to detailed information about orders from all regions and branches</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">12.</div>
+                    <h4>Centralise</h4>
+                    <p>Agencies create initial artwork, we create templates, store them in an indexed location</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+        <div class="container">
+            <h2>Volvo Cars SA have trusted us with their brand since 2010</h2>
+        </div>
+    </section>
+
+    <!-- Demo Request Form -->
+    <section id="demo" class="demo-form">
+        <div class="container">
+            <h2>REQUEST A DEMO</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Send us your details and we'll get in touch</p>
+            <div class="form-container">
+                <form id="demoForm" action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Your Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>tree</p>
+            <p style="font-size: 14px; opacity: 0.8;">
+                Australia: t: +61 429 885 783, AMP Building, Bridge Street, Sydney, NSW 2000<br>
+                South Africa: t: +27 11 447 1805 f: +27 11 447 7863, 40 Bompas Road, Dunkeld West, JHB
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We will contact you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+
